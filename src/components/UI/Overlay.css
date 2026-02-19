@@ -1,0 +1,175 @@
+/* Ported from original CSS */
+#ui-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    /* Let clicks pass through to canvas when possible */
+    z-index: 20000;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Courier New', monospace;
+    color: #0ff;
+    transition: opacity 1s;
+    box-sizing: border-box;
+    padding: 10px;
+}
+
+#ui-overlay.hud-mode {
+    justify-content: flex-start;
+    pointer-events: none;
+}
+
+#ui-overlay.hud-mode>* {
+    pointer-events: auto;
+}
+
+.loader-bar {
+    width: 300px;
+    height: 4px;
+    background: #033;
+    margin: 20px auto;
+    position: relative;
+    overflow: hidden;
+}
+
+.loader-progress {
+    width: 0%;
+    height: 100%;
+    background: #0ff;
+    box-shadow: 0 0 10px #0ff;
+    transition: width 0.2s;
+}
+
+.box-message {
+    border: 1px solid #00ffff;
+    padding: 30px;
+    background: rgba(0, 20, 40, 0.9);
+    text-align: center;
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+    max-width: 400px;
+    pointer-events: auto;
+}
+
+.cyber-btn {
+    background: transparent;
+    border: 1px solid #00ffff;
+    color: #0ff;
+    padding: 10px 30px;
+    margin: 10px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 16px;
+    letter-spacing: 2px;
+    transition: all 0.2s;
+    text-transform: uppercase;
+}
+
+.cyber-btn:hover {
+    background: #0ff;
+    color: #000;
+    box-shadow: 0 0 15px #0ff;
+}
+
+.secondary {
+    opacity: 0.7;
+    border-color: #666;
+    color: #aaa;
+}
+
+.secondary:hover {
+    opacity: 1;
+    border-color: #fff;
+    color: #fff;
+    box-shadow: 0 0 10px #fff;
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 30000;
+    pointer-events: auto;
+}
+
+/* Leaderboard Tables */
+.lb-col-rank {
+    width: 50px;
+    text-align: left;
+    color: #666;
+    padding: 5px;
+}
+
+.lb-col-alias {
+    text-align: left;
+    color: #fff;
+    text-transform: uppercase;
+    padding: 5px;
+}
+
+.lb-col-time {
+    text-align: right;
+    color: #fff;
+    padding: 5px;
+}
+
+/* Music Player */
+#music-player-container {
+    background: rgba(0, 5, 10, 0.7);
+    border: 1px solid rgba(0, 255, 255, 0.3);
+    border-left: 5px solid #00ffff;
+    border-right: 5px solid #00ffff;
+    padding: 8px 20px;
+    color: #0ff;
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.player-btn {
+    background: transparent;
+    border: none;
+    color: #0ff;
+    font-family: monospace;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s;
+    padding: 0 5px;
+}
+
+.player-btn:hover {
+    text-shadow: 0 0 8px #00ffff;
+    transform: scale(1.2);
+}
+
+#author-footer {
+    position: absolute;
+    bottom: 10px;
+    width: 100%;
+    text-align: center;
+}
+
+#author-footer a {
+    color: #0ff;
+    text-decoration: none;
+    opacity: 0.6;
+    font-size: 12px;
+}
+
+#author-footer a:hover {
+    opacity: 1;
+    text-shadow: 0 0 5px #0ff;
+}
