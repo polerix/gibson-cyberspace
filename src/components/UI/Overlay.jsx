@@ -50,7 +50,7 @@ export default function Overlay() {
                 {/* HUD */}
                 <div id="ui-overlay" className="hud-mode">
                     <div id="author-footer">
-                        <a href="https://github.com/polerix/GibsonCyberspace" target="_blank" rel="noopener noreferrer">FULL SOURCE CODE</a>
+                        <a href="https://github.com/polerix/gibson-cyberspace" target="_blank" rel="noopener noreferrer">FULL SOURCE CODE</a>
                     </div>
 
                     <div id="music-player-container" className="visible">

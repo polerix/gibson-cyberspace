@@ -1,16 +1,26 @@
 // Simple procedural cyberpunk drone synth
 export class CyberSynth {
     constructor() {
-        this.ctx = new (window.AudioContext || window.webkitAudioContext)();
+        // AudioContext must NOT be created until a user gesture has occurred.
+        // We lazy-initialize it inside start() to avoid browser autoplay blocking.
+        this.ctx = null;
         this.oscillators = [];
-        this.gainNode = this.ctx.createGain();
-        this.gainNode.connect(this.ctx.destination);
-        this.gainNode.gain.value = 0;
+        this.gainNode = null;
         this.isPlaying = false;
+    }
+
+    _ensureContext() {
+        if (!this.ctx) {
+            this.ctx = new (window.AudioContext || window.webkitAudioContext)();
+            this.gainNode = this.ctx.createGain();
+            this.gainNode.connect(this.ctx.destination);
+            this.gainNode.gain.value = 0;
+        }
     }
 
     start() {
         if (this.isPlaying) return;
+        this._ensureContext();
         this.ctx.resume();
 
         // Low drone
@@ -68,9 +78,10 @@ export class CyberSynth {
     }
 
     toggle() {
+        const nextPlaying = !this.isPlaying;
         if (this.isPlaying) this.stop();
         else this.start();
-        return !this.isPlaying;
+        return nextPlaying;
     }
 }
 
