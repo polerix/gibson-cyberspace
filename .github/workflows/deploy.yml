@@ -5,6 +5,10 @@ on:
     branches:
       - master
 
+permissions:
+  contents: write  # Add this line to grant write permissions
+  pages: write
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
