@@ -11,10 +11,14 @@ export class CyberSynth {
 
     _ensureContext() {
         if (!this.ctx) {
-            this.ctx = new (window.AudioContext || window.webkitAudioContext)();
-            this.gainNode = this.ctx.createGain();
-            this.gainNode.connect(this.ctx.destination);
-            this.gainNode.gain.value = 0;
+            try {
+                this.ctx = new (window.AudioContext || window.webkitAudioContext)();
+                this.gainNode = this.ctx.createGain();
+                this.gainNode.connect(this.ctx.destination);
+                this.gainNode.gain.value = 0;
+            } catch (err) {
+                console.warn("AudioContext could not be initialized:", err);
+            }
         }
     }
 

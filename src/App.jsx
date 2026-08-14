@@ -1,14 +1,16 @@
-import React, { Suspense } from 'react';
+import React, { Suspense, useEffect } from 'react';
 import { Canvas } from '@react-three/fiber';
 import Overlay from './components/UI/Overlay';
 import Mainframe from './components/Scene/Mainframe';
+import ErrorBoundary from './components/UI/ErrorBoundary';
 import { useStore } from './utils/store';
 
 function App() {
+    console.log('Gibson Cyberspace v2.0 // App initialized');
     const { introComplete } = useStore();
 
     return (
-        <>
+        <ErrorBoundary>
             <Overlay />
 
             <div id="app" style={{
@@ -23,7 +25,7 @@ function App() {
                     </Suspense>
                 </Canvas>
             </div>
-        </>
+        </ErrorBoundary>
     );
 }
 
