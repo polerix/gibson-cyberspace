@@ -1,16 +1,158 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8" />
-  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Gibson Cyberspace</title>
+  <title>GIBSON CYBERSPACE // LCARS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #000000;
+      --orange: #ff9900;
+      --amber: #ffcc00;
+      --blue: #99ccff;
+      --lavender: #cc99cc;
+      --red: #cc6666;
+      --teal: #3399cc;
+      --dim: rgba(18,22,32,0.85);
+      --border: rgba(255,153,0,0.25);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; background: var(--bg); color: #fff; font-family: 'Share Tech Mono', monospace; overflow-x: hidden; }
+    body::before {
+      content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 0;
+      background:
+        radial-gradient(ellipse 800px 500px at 20% 10%, rgba(255,153,0,0.05) 0%, transparent 60%),
+        radial-gradient(ellipse 700px 400px at 80% 85%, rgba(153,102,204,0.05) 0%, transparent 60%);
+    }
+    .frame {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      min-height: 100vh;
+      position: relative; z-index: 1;
+      padding: 20px;
+      gap: 16px;
+    }
+    /* SIDEBAR */
+    .sidebar { display: flex; flex-direction: column; gap: 8px; }
+    .elbow {
+      height: 80px; background: var(--orange); border-radius: 40px 0 0 0;
+      display: flex; align-items: flex-end; padding: 10px 14px;
+      font-family: 'Orbitron', sans-serif; font-weight: 900; font-size: 11px;
+      color: #000; letter-spacing: 2px;
+    }
+    .bar { height: 40px; display: flex; align-items: center; padding: 0 12px;
+      font-family: 'Orbitron', sans-serif; font-size: 10px; font-weight: 700;
+      letter-spacing: 1px; color: #000; }
+    .bar.amber { background: var(--amber); }
+    .bar.blue  { background: var(--blue); }
+    .bar.red   { background: var(--red); }
+    .bar.lavender { background: var(--lavender); }
+    .spacer { flex: 1; background: rgba(255,153,0,0.12); border-left: 10px solid var(--orange); min-height: 40px; }
+    .endcap { height: 50px; background: var(--lavender); border-radius: 0 0 0 25px;
+      display: flex; align-items: center; padding-left: 14px;
+      font-family: 'Orbitron', sans-serif; font-size: 9px; font-weight: 700;
+      color: #000; letter-spacing: 1px; }
+    /* MAIN */
+    .main { display: flex; flex-direction: column; gap: 20px; }
+    .top-bar {
+      background: var(--dim); border: 1px solid var(--border);
+      border-radius: 0 20px 20px 0; padding: 14px 24px;
+      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;
+      box-shadow: 0 0 30px rgba(255,153,0,0.07);
+    }
+    .sys-label { font-family: 'Orbitron', sans-serif; font-size: 10px; color: var(--blue); letter-spacing: 3px; text-transform: uppercase; margin-bottom: 4px; }
+    .title { font-family: 'Orbitron', sans-serif; font-size: 28px; font-weight: 900; color: var(--orange); letter-spacing: 4px; text-transform: uppercase; }
+    .badge { background: rgba(255,204,0,0.1); border: 1px solid var(--amber); color: var(--amber);
+      padding: 4px 12px; border-radius: 4px; font-size: 10px; letter-spacing: 2px; }
+    /* DIVIDER */
+    .divider { display: flex; align-items: center; gap: 10px; }
+    .div-pill { width: 40px; height: 24px; background: var(--orange); border-radius: 12px 0 0 12px; }
+    .div-label { font-family: 'Orbitron', sans-serif; font-size: 11px; font-weight: 800; color: var(--orange); letter-spacing: 3px; text-transform: uppercase; }
+    .div-bar { flex: 1; height: 5px; background: var(--orange); border-radius: 3px; }
+    /* CONTENT PANEL */
+    .panel {
+      background: var(--dim); border: 1px solid var(--border);
+      border-radius: 12px; border-left: 6px solid var(--orange);
+      padding: 32px 40px; display: flex; flex-direction: column; gap: 28px;
+    }
+    .description { color: #ccddff; font-size: 1.05rem; line-height: 1.75; max-width: 680px; }
+    .type-tag { display: inline-block; color: var(--amber); font-size: 0.85rem; letter-spacing: 2px; margin-bottom: 4px; }
+    /* LAUNCH BTN */
+    .launch-wrap { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; }
+    .lcars-btn {
+      background: var(--orange); color: #000; border: none;
+      border-radius: 28px; padding: 14px 52px;
+      font-size: 1.3rem; font-family: 'Orbitron', sans-serif; font-weight: 700;
+      letter-spacing: 0.2em; cursor: pointer; text-decoration: none;
+      display: inline-block; text-transform: uppercase;
+      transition: background 0.2s, box-shadow 0.2s;
+      box-shadow: 0 0 20px rgba(255,153,0,0.3);
+    }
+    .lcars-btn:hover { background: var(--amber); box-shadow: 0 0 30px rgba(255,204,0,0.5); }
+    .back-btn {
+      background: rgba(153,204,255,0.1); color: var(--blue);
+      border: 1px solid var(--blue); border-radius: 20px; padding: 10px 24px;
+      font-size: 0.85rem; font-family: 'Orbitron', sans-serif; font-weight: 700;
+      letter-spacing: 0.1em; cursor: pointer; text-decoration: none;
+      display: inline-block; text-transform: uppercase;
+      transition: background 0.2s;
+    }
+    .back-btn:hover { background: var(--blue); color: #000; }
+    /* FOOTER */
+    footer { text-align: center; padding: 20px 0; color: var(--teal); font-size: 10px; letter-spacing: 3px; border-top: 1px solid var(--border); }
+    /* RESPONSIVE */
+    @media (max-width: 700px) {
+      .frame { grid-template-columns: 1fr; }
+      .sidebar { flex-direction: row; height: 50px; }
+      .elbow { border-radius: 20px 0 0 20px; width: 100px; height: 50px; font-size: 9px; }
+      .bar { height: 50px; flex: 1; }
+      .spacer { border-left: none; border-bottom: 6px solid var(--orange); min-height: 0; }
+      .endcap { border-radius: 0 20px 20px 0; height: 50px; }
+      .panel { padding: 20px; }
+      .title { font-size: 20px; }
+      .lcars-btn { padding: 12px 32px; font-size: 1.1rem; }
+    }
+  </style>
 </head>
-
 <body>
-  <div id="root"></div>
-  <script type="module" src="/src/main.jsx"></script>
+  <div class="frame">
+    <aside class="sidebar">
+      <div class="elbow">LCARS</div>
+      <div class="bar amber">SYS-01</div>
+      <div class="bar blue">NET-02</div>
+      <div class="bar red">AUX-03</div>
+      <div class="bar lavender">LOG-04</div>
+      <div class="spacer"></div>
+      <div class="endcap">BIG0TIME</div>
+    </aside>
+    <main class="main">
+      <div class="top-bar">
+        <div>
+          <div class="sys-label">BIG0TIME // PROJECT DATABASE</div>
+          <div class="title">⚡ GIBSON CYBERSPACE</div>
+        </div>
+        <div class="badge">NODE ONLINE</div>
+      </div>
+      <div class="divider">
+        <div class="div-pill"></div>
+        <div class="div-label">SYSTEM PROFILE</div>
+        <div class="div-bar"></div>
+      </div>
+      <div class="panel">
+        <div>
+          <div class="type-tag">// APPLICATION</div>
+          <p class="description">A cyberpunk cyberspace visualizer inspired by William Gibson's Neuromancer. Navigate a 3D data lattice pulled from the matrix of human memory, rendered in neon geometry and console fog.</p>
+        </div>
+        <div class="launch-wrap">
+          <a href="app.html" class="lcars-btn">LAUNCH</a>
+          <a href="https://polerix.github.io/big0time/" class="back-btn">← INDEX</a>
+        </div>
+      </div>
+      <footer>LCARS INTERFACE // BIG0TIME PROJECT DATABASE // STARFLEET SUBSPACE NODE</footer>
+    </main>
+  </div>
 </body>
-
 </html>
